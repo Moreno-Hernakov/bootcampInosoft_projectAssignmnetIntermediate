@@ -36,6 +36,7 @@ class TaskRepository
 	{
 		$dataSaved = [
 			'title'=>$data['title'],
+			'description'=>$data['description'],
 			'assigned'=>null,
 			'subtasks'=> [],
 			'created_at'=>time()

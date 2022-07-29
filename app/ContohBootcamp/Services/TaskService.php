@@ -48,14 +48,9 @@ class TaskService {
 			$editTask['title'] = $formData['title'];
 		}
 
-		if(isset($formData['assigned']))
+		if(isset($formData['description']))
 		{
-			$editTask['assigned'] = $formData['assigned'];
-		}
-
-		if(isset($formData['subtasks']))
-		{
-			$editTask['subtasks'] = $formData['subtasks'];
+			$editTask['description'] = $formData['description'];
 		}
 
 		$id = $this->taskRepository->save( $editTask);

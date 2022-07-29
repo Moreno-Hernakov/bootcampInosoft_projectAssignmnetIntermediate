@@ -57,7 +57,7 @@ class MongoModel
         return $documents;
     }
 
-    public function find($filter) : array
+    public function find($filter) : ?array
     {
         $documents = $this->collection->findOne($filter);
         return $documents;
@@ -68,5 +68,10 @@ class MongoModel
         $id = isset($data['_id']) ? $data['_id']: (string) new \MongoDB\BSON\ObjectId();
         $this->collection->updateOne(['_id' => $id], ['$set' => $data], ['upsert'=>true]);
         return (string) $id;
+    }
+
+    public function deleteQuery(array $filter): void
+    {
+        $this->collection->deleteOne($filter);
     }
 }
