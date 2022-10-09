@@ -15,14 +15,17 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::prefix('task')->group(function() {
-    Route::post('/show_tasks', [TaskController::class, 'showTasks']);
-    Route::post('/create_task', [TaskController::class, 'createTask']);
-    Route::post('/update_task', [TaskController::class, 'updateTask']);
+    Route::controller(TaskController::class)->group(function () {
+          // tasks route
+        Route::get('/show_tasks', 'showTasks');
+        Route::post('/create_task', 'createTask');
+        Route::put('/update_task', 'updateTask');
+        Route::delete('/delete_task/{id}', 'deleteTask');
+        Route::put('/assign_task', 'assignTask');
+        Route::put('/unassign_task', 'unassignTask');
 
-    // NOTE: lanjutkan tugas assignment di routing baru dibawah ini
-    Route::post('/delete_task', [TaskController::class, 'deleteTask']);
-    Route::post('/assign_task', [TaskController::class, 'assignTask']);
-    Route::post('/unassign_task', [TaskController::class, 'unassignTask']);
-    Route::post('/create_subtask', [TaskController::class, 'createSubtask']);
-    Route::post('/delete_subtask', [TaskController::class, 'deleteSubtask']);
+        // subtask route
+        Route::put('/create_subtask', 'createSubtask');
+        Route::delete('/delete_subtask/{task_id}/{subtask_id}', 'deleteSubtask');
+    });
 });
